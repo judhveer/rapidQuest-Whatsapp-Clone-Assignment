@@ -59,10 +59,10 @@ export async function findChatHeads() {
 
 
 /** Legacy messages for older docs */
-export async function findMessagesByWaId(wa_id, { limit = 50, before } = {}) {
+export async function findMessagesByWaId(wa_id, { limit = 100, before } = {}) {
   const query = { wa_id };
   if (before) query.createdAt = { $lt: new Date(before) };
-  const docs = await Message.find(query).sort({ createdAt: 1 }).limit(Number(limit) || 50).lean();
+  const docs = await Message.find(query).sort({ createdAt: 1 }).limit(Number(limit) || 100).lean();
   return docs;
 }
 
@@ -110,7 +110,7 @@ export async function findChatHeadsForSelf(self) {
 }
 
 /** Messages between self and peer (chronological) */
-export async function findMessagesBetween(self, peer, { limit = 50, before } = {}) {
+export async function findMessagesBetween(self, peer, { limit = 100, before } = {}) {
   const query = {
     $or: [
       { sender_wa_id: self, receiver_wa_id: peer },
@@ -118,7 +118,7 @@ export async function findMessagesBetween(self, peer, { limit = 50, before } = {
     ]
   };
   if (before) query.createdAt = { $lt: new Date(before) };
-  const docs = await Message.find(query).sort({ createdAt: 1 }).limit(Number(limit) || 50).lean();
+  const docs = await Message.find(query).sort({ createdAt: 1 }).limit(Number(limit) || 100).lean();
   return docs.map(d => ({ ...d, direction: d.sender_wa_id === self ? 'out' : 'in' }));
 }
 

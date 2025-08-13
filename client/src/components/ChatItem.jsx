@@ -24,7 +24,7 @@ export default function ChatItem({ chat, active, onClick }) {
             {last.createdAt ? timeShort(last.createdAt) : ""}
           </div>
         </div>
-        <div className="text-sm text-gray-600 truncate">
+        <div className="text-sm text-gray-600 truncate overflow-hidden">
           {last.direction === "out" ? "You: " : ""}
           {last.text || "[media]"}
         </div>
