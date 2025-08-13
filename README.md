@@ -161,7 +161,7 @@ npm run dev
 
 | Chat List                                       | Conversation View                                       |
 | ----------------------------------------------- | ------------------------------------------------------- |
-| ![Chat List Screenshot](./assets/chat-list.png) | ![Conversation View Screenshot](./assets/chat-view.png) |
+| ![Chat List Screenshot](./client/src/assets/chat_group.png) | ![Conversation View Screenshot](./client/src/assets/message.png) |
 
 ---
 
