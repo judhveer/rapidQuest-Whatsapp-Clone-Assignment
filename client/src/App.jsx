@@ -13,14 +13,30 @@ import socket from "./sockets/socket";
 
 export default function App() {
 
+  const waIds = ["919937320320", "919812345678", "919765432109"];
+
   const [self] = useState(() => {
     const saved = localStorage.getItem("selfWaId");
     if (saved) return saved;
-    // pick or set your own number here for this browser
-    const pick = "919937320320";    // change per browser to simulate different users
+
+    // Pick the next available waId from list based on how many times we've assigned
+    const assignedCount = parseInt(localStorage.getItem("waIdAssignedCount") || "0", 10);
+    const pick = waIds[assignedCount % waIds.length];
+
     localStorage.setItem("selfWaId", pick);
+    localStorage.setItem("waIdAssignedCount", assignedCount + 1);
+
     return pick;
   });
+
+  // const [self] = useState(() => {
+  //   const saved = localStorage.getItem("selfWaId");
+  //   if (saved) return saved;
+  //   // pick or set your own number here for this browser
+  //   const pick = "919937320320";    // change per browser to simulate different users
+  //   localStorage.setItem("selfWaId", pick);
+  //   return pick;
+  // });
 
   // Put this above the component
   function normalizeMsg(msg, self) {
