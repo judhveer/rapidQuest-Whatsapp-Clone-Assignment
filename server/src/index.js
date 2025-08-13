@@ -46,6 +46,6 @@ await connectDB(MONGODB_URI);
 
 // ⬇️ REPLACE app.listen(...) with this block
 const server = http.createServer(app);
-initSocket(server, process.env.CLIENT_ORIGIN || 'http://localhost:5173');
+initSocket(server, process.env.CLIENT_ORIGIN || '*');
 const PORT = process.env.PORT || 8080;
 server.listen(PORT, () => console.log(`API running on :${PORT}`));
