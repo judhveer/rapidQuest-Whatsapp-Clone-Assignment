@@ -1,8 +1,14 @@
 import api from './client';
 
-export async function sendMessage(from, to, text, contact_name) {
-  const { data } = await api.post('/api/messages', { from, to, text, contact_name });
+// POST /api/messages
+// body: { self, peer, text, contact_name?, clientMsgId? }
+export async function sendMessage(self, peer, text, contact_name, clientMsgId) {
+  const { data } = await api.post('/api/messages', {
+    self,
+    peer,
+    text,
+    contact_name,
+    clientMsgId,
+  });
   return data.data;
 }
-
-

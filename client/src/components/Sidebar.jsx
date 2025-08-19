@@ -1,6 +1,6 @@
 import ChatItem from "./ChatItem";
 
-export default function Sidebar({ chats, activeWaId, onSelect }) {
+export default function Sidebar({ chats, activePeerWaId, onSelect }) {
   return (
     <div className="w-full md:w-[360px] border-r h-full flex flex-col bg-white">
       <div className="h-14 px-4 bg-emerald-700 text-white flex items-center font-semibold">
@@ -12,9 +12,9 @@ export default function Sidebar({ chats, activeWaId, onSelect }) {
         ) : (
           chats.map((c) => (
             <ChatItem
-              key={c.wa_id}
+              key={c.peer_wa_id}
               chat={c}
-              active={c.wa_id === activeWaId}
+              active={c.peer_wa_id === activePeerWaId}
               onClick={() => onSelect(c)}
             />
           ))

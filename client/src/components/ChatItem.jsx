@@ -2,7 +2,7 @@ import { timeShort } from "../utils/date";
 
 export default function ChatItem({ chat, active, onClick }) {
   const last = chat.lastMessage || {};
-  const initials = (chat.contact_name || chat.wa_id || "")
+  const initials = (chat.contact_name || chat.peer_wa_id || "")
     .toString()
     .slice(0, 2)
     .toUpperCase();
@@ -19,7 +19,7 @@ export default function ChatItem({ chat, active, onClick }) {
       </div>
       <div className="flex-1 text-left">
         <div className="flex justify-between">
-          <div className="font-medium">{chat.contact_name || chat.wa_id}</div>
+          <div className="font-medium">{chat.contact_name || chat.peer_wa_id}</div>
           <div className="text-xs text-gray-500">
             {last.createdAt ? timeShort(last.createdAt) : ""}
           </div>

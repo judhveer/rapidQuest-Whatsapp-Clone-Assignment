@@ -3,6 +3,7 @@ import StatusTick from "./StatusTick";
 
 export default function MessageBubble({ msg }) {
   const mine = msg.direction === "out";
+  const shownTime = msg.sent_at || msg.createdAt; // 👈 prefer WA time
 
   return (
     <div className={`w-full flex ${mine ? "justify-end" : "justify-start"}`}>
@@ -15,7 +16,7 @@ export default function MessageBubble({ msg }) {
           {msg.text || "[media]"}
         </div>
         <div className="mt-1 text-[10px] text-gray-500 flex items-center justify-end">
-          {timeShort(msg.createdAt)}
+          {timeShort(shownTime)}
           {mine && <StatusTick status={msg.status} />}
         </div>
       </div>
