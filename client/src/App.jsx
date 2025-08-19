@@ -11,17 +11,33 @@ export default function App() {
   // Sim users for different tabs/browsers
   const waIds = ["919937320320", "919812345678", "919765432109"];
 
+  // const [self] = useState(() => {
+  //   const saved = localStorage.getItem("selfWaId");
+  //   if (saved) return saved;
+
+  //   const assignedCount = parseInt(localStorage.getItem("waIdAssignedCount") || "0", 10);
+  //   const pick = waIds[assignedCount % waIds.length];
+
+  //   localStorage.setItem("selfWaId", pick);
+  //   localStorage.setItem("waIdAssignedCount", assignedCount + 1);
+  //   return pick;
+  // });
+
   const [self] = useState(() => {
+    const params = new URLSearchParams(window.location.search);
+    const fromUrl = params.get("self");
+    if (fromUrl) {
+      localStorage.setItem("selfWaId", fromUrl);
+      return fromUrl;
+    }
     const saved = localStorage.getItem("selfWaId");
     if (saved) return saved;
-
-    const assignedCount = parseInt(localStorage.getItem("waIdAssignedCount") || "0", 10);
-    const pick = waIds[assignedCount % waIds.length];
-
+    // fallback: random from pool (not guaranteed unique across browsers, but better than always index 0)
+    const pick = waIds[Math.floor(Math.random() * waIds.length)];
     localStorage.setItem("selfWaId", pick);
-    localStorage.setItem("waIdAssignedCount", assignedCount + 1);
     return pick;
   });
+
 
   // Compute direction on the client (never rely on wa_id)
   function normalizeMsg(msg, self) {
